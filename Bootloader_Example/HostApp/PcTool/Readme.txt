@@ -11,3 +11,8 @@ Once you have build the application, then run the application like below.
 		
 		example:
 			.\etx_ota_app.exe 8 ..\..\Application\Debug\Blinky.bin
+
+C:\Users\Cence-Power\Documents\GitHub\CL4-STM32f07_FW\EmbeTroniX_example\APPLICATION\Debug\APPLICATION.bin
+com port = COM5
+
+.\etx_ota_app.exe 5 APPLICATION.bin

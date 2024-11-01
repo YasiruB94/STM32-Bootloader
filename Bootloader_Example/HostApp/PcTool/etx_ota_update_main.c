@@ -23,7 +23,7 @@ compile with the command: gcc etx_ota_update_main.c RS232\rs232.c -IRS232 -Wall 
 
 uint8_t DATA_BUF[ETX_OTA_PACKET_MAX_SIZE];
 uint8_t APP_BIN[ETX_OTA_MAX_FW_SIZE];
-
+uint8_t first_time = 0;
 void delay(uint32_t us)
 {
     us *= 10;
@@ -208,6 +208,10 @@ int send_ota_data(int comport, uint8_t *data, uint16_t data_len)
   ETX_OTA_DATA_ *ota_data = (ETX_OTA_DATA_*)DATA_BUF;
   int ex = 0;
 
+
+
+  first_time++;
+
   memset(DATA_BUF, 0, ETX_OTA_PACKET_MAX_SIZE);
 
   ota_data->sof          = ETX_OTA_SOF;
@@ -242,6 +246,18 @@ int send_ota_data(int comport, uint8_t *data, uint16_t data_len)
       ex = -1;
       break;
     }
+  }
+
+  if(first_time == 1)
+  {
+    printf("stopping for a moment\n");
+    delay(8000000);
+    printf("stopping for a moment COMPLETED \n");
+
+  }
+  else
+  {
+    delay(2000);
   }
 
   if( ex >= 0 )
